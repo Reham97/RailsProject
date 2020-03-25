@@ -1,0 +1,2 @@
+class AddRefToComment < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class AddRefToPost < ApplicationRecord
+end
