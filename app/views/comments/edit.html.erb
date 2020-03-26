@@ -22,7 +22,7 @@
                 <h1 style="color: #007b5e;">Edit Post</h1>
 
                 </div>
-                <%= form_for @post, :url => {:controller => :posts, action: :update} do |f| %>
+                <%= form_for @post, :as => :post_data, :url => {:controller => :posts, action: :update} do |f| %>
                 <%= csrf_meta_tags %>
 
                 <div class="form-content">

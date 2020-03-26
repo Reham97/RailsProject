@@ -12,6 +12,9 @@
 <% end %>     
 
 
+
+
+
 <!------ Include the above in your HEAD tag ---------->
 
 <!-- Team -->
@@ -19,11 +22,10 @@
         <div class="container register-form">
             <div class="form">
                 <div class="note">
-                <h1 style="color: #007b5e;">Edit Post</h1>
+                <h1 style="color: #007b5e;">Add New Post</h1>
 
                 </div>
-                <%= form_for @post, :url => {:controller => :posts, action: :update} do |f| %>
-                <%= csrf_meta_tags %>
+                <%= form_for @post do |f| %>
 
                 <div class="form-content">
                     <div class="row">

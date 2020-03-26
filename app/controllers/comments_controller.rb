@@ -1,51 +1,64 @@
 class CommentsController < ApplicationController
 
-def index
-    @comments = Comment.all
-end
-
-
-def show
-end
-
-def new
-    @comment = Comment.new
-end
-
-
-
-def create
-    @comment = Comment.new(comment_params)
-    respond_to do |format|
-    if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-    else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+    def index
+        @comments = Comment.all.order("created_at DESC")
     end
+    
+    
+    def show
+        @comment = Comment.find(params[:id])
     end
-end
-
-
-
-
-def destroy
-    @comment.destroy
-    respond_to do |format|
-    format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-    format.json { head :no_content }
+    
+    def new
     end
-end
+    
+   
+    
+    
+    def create
 
-private
-    def set_comment
-    @comment = Comment.find(params[:id])
+        @comment = Comment.new(comment_params)
+
+
+        p @comment
+        p @comment
+        p @comment
+        p @comment
+
+
+
+        if @comment.save
+            redirect_to proc { post_path(@comment.post_id) }
+
+        else
+            redirect_to posts_path()
+        end
     end
-
-
-private  
-    def comment_params
-    params.require(:comment).permit(:title, :post_id, :user_id)
+    
+    
+ 
+    def destroy
+        @comment = Comment.find(params[:id])
+        @comment.destroy        
+        redirect_to :action => 'index'
     end
-end
+    
+
+    
+    
+
+
+
+
+    private
+        def set_Comment
+        @comment = Comment.find(params[:id])
+        end
+    
+    
+    private  
+        def comment_params
+        params.require(:comment).permit(:title, :post_id, :user_id)
+        end
+    end
+    

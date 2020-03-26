@@ -7,6 +7,7 @@ class PostsController < ApplicationController
     
     def show
       @post = Post.find(params[:id])
+      @comments = @post.comments
     end
   
     def new
@@ -33,6 +34,8 @@ class PostsController < ApplicationController
   
    
     def update
+      Rails.logger.debug params.inspect
+
       @post = Post.find(params[:id])
       respond_to do |format|
         if @post.update_attributes(post_params)

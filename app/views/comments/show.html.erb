@@ -28,18 +28,14 @@
          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
             <div class="card-body d-flex flex-column align-items-start">
                 <strong class="d-inline-block mb-2 text-primary"> Enter Your Comment: </strong>
-                <p class="card-text mb-auto">   
-                   <%= form_for(Comment.new) do |f| %>
-   
-
-                     <%= f.text_area(:title, rows: 4, class: "form-control") %>
+                <p class="card-text mb-auto">      
+                 <%= form_for ([@post, @post.comments.build]) do |f| %>
+                     <%= f.text_area(:title, size: "50x4",class:"form-control",placeholder:"body") %>
+                       <br>
                      <%= f.hidden_field(:user_id,value:"1") %>
                      <%= f.hidden_field(:post_id,value:@post.id) %>
-
-                     <br>
-                     <%= f.submit("Comment") %>
-
-                 <% end %>
+                <%= f.submit %>
+                <% end %>
                 </p>
             </div>
          </div>
@@ -50,8 +46,8 @@
         
 
 <% if @post.comments.count != 0 %>
+    <% @post.comments.each do |comment| %>
     <div class="row">  
-            <% @post.comments.each do |comment| %>
         <div class="col-md-4">
             <div class="card mb-4 text-white bg-dark">
                 <img class="card-img-top" src="https://www.pngkey.com/png/detail/119-1196200_vector-library-download-buy-comments-instagram-comment-logo.png" alt="Card image cap">
@@ -61,10 +57,9 @@
                 <a href="http://.jquery2dotnet.com/" class="btn btn-outline-light btn-sm">Delete</a>
                 </div>
             </div>
-
         </div>
-            <% end %>
     </div>
+    <% end %>
 
 <% end %>  
 
