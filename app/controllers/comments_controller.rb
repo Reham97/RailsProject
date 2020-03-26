@@ -1,31 +1,12 @@
 class CommentsController < ApplicationController
 
-    def index
-        @comments = Comment.all.order("created_at DESC")
-    end
-    
-    
-    def show
-        @comment = Comment.find(params[:id])
-    end
     
     def new
-    end
-    
-   
-    
+    end    
     
     def create
 
         @comment = Comment.new(comment_params)
-
-
-        p @comment
-        p @comment
-        p @comment
-        p @comment
-
-
 
         if @comment.save
             redirect_to proc { post_path(@comment.post_id) }
@@ -33,6 +14,7 @@ class CommentsController < ApplicationController
         else
             redirect_to posts_path()
         end
+        
     end
     
     
@@ -40,15 +22,9 @@ class CommentsController < ApplicationController
     def destroy
         @comment = Comment.find(params[:id])
         @comment.destroy        
-        redirect_to :action => 'index'
+        redirect_to proc { post_path(@comment.post_id) }
     end
     
-
-    
-    
-
-
-
 
     private
         def set_Comment
